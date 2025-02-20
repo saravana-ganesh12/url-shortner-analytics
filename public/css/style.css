@@ -1,0 +1,240 @@
+/* CSS file for Home login screen and main screen for URL shortner*/
+
+body {
+    line-height: 1.6;
+    color: #333;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 20px 150px; 
+    background-color: #f9f9f9;
+    position: relative;
+    min-height: 100vh;
+  }
+  
+  header {
+    margin-bottom: 30px;
+    text-align: center;
+  }
+  
+  header h1 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+  }
+  
+  section {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    margin-bottom: 30px;
+  }
+  
+  section p {
+    font-size: 18px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-top: 0;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+  }
+  
+  /* Form elements */
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  label {
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #555;
+  }
+  
+  input[type="text"],
+  select {
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+  }
+  
+  input[type="text"]:focus,
+  select:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+  }
+  
+  input[type="submit"] {
+    background-color: #bf76e9;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    align-self: flex-start;
+  }
+  
+  input[type="submit"]:hover {
+    background-color: rgb(233, 64, 182);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    align-self: flex-start;
+    font-weight: 500;
+  }
+  
+  .result-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    z-index: 1000;
+    border-top: 3px solid rgb(233, 64, 182);
+  }
+  
+  .result-container .result-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .result-container .result-header h3 {
+    margin: 0;
+    color: #2c3e50;
+  }
+  
+  .result-container .result-content {
+    max-height: 100px;
+    overflow-y: auto;
+    background-color: #f7f7f7;
+    padding: 15px;
+    border-radius: 4px;
+    word-break: break-all;
+    font-family: monospace;
+    font-size: 14px;
+    white-space: pre-wrap;
+    border: 1px solid #ddd;
+  }
+  
+  #response {
+    display: none;
+  }
+  
+  .analytics {
+    display: flex;
+    flex-direction: row;
+    gap: 10%;
+  }
+
+  @media (min-width: 768px) {
+    section {
+      padding: 30px;
+    }
+    
+    .form-row {
+      display: flex;
+      gap: 20px;
+    }
+    
+    .form-row > div {
+      flex: 1;
+    }
+    
+    .result-container .result-content {
+      max-height: 120px;
+    }
+  }
+  
+  footer {
+    margin-top: 40px;
+    text-align: center;
+    color: #7f8c8d;
+    font-size: 14px;
+  }
+  
+  .section-title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .section-title i {
+    margin-right: 10px;
+    color: #3498db;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  pre.json {
+    background-color: #f5f5f5;
+    padding: 15px;
+    border-radius: 4px;
+    overflow-x: auto;
+  }
+
+  .signin-section {
+    text-align: center;
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    padding: 30px;
+    margin: 30px auto;
+    max-width: 400px;
+    border-top: 4px solid #bf76e9;
+  }
+
+  
+.signin-section p {
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+    margin-top: 0;
+    margin-bottom: 25px;
+  }
+  
+  .googleSignin {
+    display: inline-flex;
+    align-items: center;
+    background-color: #fff;
+    color: #757575;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    overflow: hidden;
+    padding: 20px;
+  }
+
+  .googleSignin .text {
+    padding: 0 16px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  
+  .googleSignin:hover {
+    background-color: #f5f5f5;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.24);
+  }

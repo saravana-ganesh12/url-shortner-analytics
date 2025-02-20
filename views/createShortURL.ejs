@@ -1,0 +1,234 @@
+<%- include('partials/header.ejs') %>
+<section>
+<p><i class="icon-link"></i> Create Short URL</p>
+<form onsubmit="handleSubmitCreate(event)">
+<div class="form-row">
+<div>
+<label for="longURL">URL:</label>
+<input type="text" id="longURL" name="longURL" required>
+</div>
+<div>
+<label for="customAlias">Custom Alias:</label>
+<input type="text" id="customAlias" name="customAlias">
+</div>
+<div>
+<label for="topic">Topic:</label>
+<input type="text" id="topic" name="topic">
+</div>
+</div>
+<br>
+<input type="submit" value="submit">
+</form>
+</section>
+<div class="analytics">
+<section>
+    <form onsubmit="handleSubmitAlias(event)">
+        <label for="aliasSelect">Get Analytics by Alias:</label>
+        <select name="aliasSelect" id="aliasSelect">
+            <option value="">Select an alias</option>
+            <% if(alias) { %>
+                <% for(let i = 0; i < alias.length; i++) { %>
+                <option value="<%= alias[i].alias %>"><%= alias[i].alias %></option>
+                <% } %>
+            <% } %>
+          </select>
+        <br>
+        <input type="submit" value="submit">
+    </form>
+</section>
+<section>
+    <form onsubmit="handleSubmitTopic(event)">
+        <label for="topicSelect">Get Analytics by Topic:</label>
+        <select name="topicSelect" id="topicSelect">
+            <option value="">Select a topic</option>
+            <% if(topic) { %>
+                <% for(let i = 0; i < topic.length; i++) { %>
+                    <option value="<%= topic[i].topic %>"><%= topic[i].topic %></option>
+                <% } %>
+            <% } %>
+          </select>
+        <br>
+        <input type="submit" value="submit">
+    </form>
+</section>
+<section>
+    <form onsubmit="handleSubmitFull(event)">
+        <label>Get Full Analytics</label>
+        <input type="submit" value="submit">
+    </form>
+</section>
+</div>
+<div class="result-container">
+    <div class="result-header">
+      <h3>Result</h3>
+    </div>
+    <div class="result-content" id="fixedResult"></div>
+  </div>
+  
+<script>
+
+    //Handle Create Short
+    async function handleSubmitCreate(event) {
+
+        event.preventDefault();
+        
+        const longURL = document.getElementById('longURL').value;
+        const customAlias = document.getElementById('customAlias').value;
+        const topic = document.getElementById('topic').value;
+
+        const payLoad = {longURL: longURL}
+        if(customAlias) payLoad.customAlias = customAlias;
+        if(topic) payLoad.topic = topic;
+        try {
+             const response = await fetch('/api/shorten', {
+                method:'POST',
+                headers: {
+                    'Content-Type':'application/json'
+                },
+                body:JSON.stringify(payLoad)
+            });
+
+            const jsonData = await response.json();
+            
+            if(jsonData.errorMessage) {
+                alert(jsonData.errorMessage);
+            }
+            else {
+                document.getElementById('fixedResult').textContent = jsonData.shortUrl;
+
+            }
+        }
+        catch(err) {
+            console.log(err);
+            if(String(err).includes("Many reque")) {
+                alert('Many request at a time, please try again later');
+            }
+            else {
+                alert(err);
+            }
+        }
+    }
+    
+    async function handleSubmitAlias(event) {
+
+        event.preventDefault();
+
+        const alias = document.getElementById('aliasSelect').value;
+
+        if(alias) {
+            try {
+                const response = await fetch(`/api/analytics/${alias}`, {
+                    method:'GET',
+                    headers: {
+                    'Content-Type':'application/json'
+                    }
+                });
+
+                const jsonData = await response.json();
+    
+               if(jsonData.errorMessage) {
+                    alert(jsonData.errorMessage);
+                }
+                else {
+                    document.getElementById('fixedResult').textContent = JSON.stringify(jsonData);
+                }
+            }
+            catch(err) {
+                console.log(err);
+                if(String(err).includes("Many reque")) {
+                    alert('Many request at a time, please try again later');
+                }
+                else {
+                    alert(err);
+                }
+            }
+        }     
+    }
+
+    async function handleSubmitTopic(event) {
+
+        event.preventDefault();
+
+        const topic = document.getElementById('topicSelect').value;
+        if(topic) {
+            try {
+            const response = await fetch(`/api/analytics/topic/${topic}`, {
+                method:'GET',
+                headers: {
+                    'Content-Type':'application/json'
+            }
+            });
+
+            const jsonData = await response.json();
+
+            if(jsonData.errorMessage) {
+                alert(jsonData.errorMessage);
+            }
+            else {
+                document.getElementById('fixedResult').textContent = JSON.stringify(jsonData);
+            }
+        }
+        catch(err) {
+            console.log(err);
+            if(String(err).includes("Many reque")) {
+                alert('Many request at a time, please try again later');
+            }
+            else {
+            alert(err);
+            }
+        }
+    }
+}
+
+
+
+async function handleSubmitFull(event) {
+
+    event.preventDefault();
+    try {
+        const response = await fetch(`/api/analytics/overall`, {
+        method:'GET',
+        headers: {
+            'Content-Type':'application/json'
+        }
+        });
+
+        const jsonData = await response.json();
+
+    if(jsonData.errorMessage) {
+        alert(jsonData.errorMessage);
+    }
+    else {
+        document.getElementById('fixedResult').textContent = JSON.stringify(jsonData);
+    }
+}
+catch(err) {
+    console.log(err);
+    if(String(err).includes("Many reque")) {
+        alert('Many request at a time, please try again later');
+    }
+    else {
+    alert(err);
+}
+}
+ const originalResponse = document.getElementById('response');
+  const fixedResult = document.getElementById('fixedResult');
+  
+  const observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+      if (mutation.type === 'characterData' || mutation.type === 'childList') {
+        fixedResult.textContent = originalResponse.textContent;
+      }
+    });
+  });
+  
+  observer.observe(originalResponse, { 
+    characterData: true,
+    childList: true,
+    subtree: true 
+  });
+  
+}
+</script>
+<%- include('partials/footer.ejs') %>
+
