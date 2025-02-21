@@ -48,7 +48,7 @@ router.post('/', async (req, res) => {
         const response = await client.query('INSERT INTO url (user_id, url_id, url_custom_alias, long_url, topic, alias) VALUES ($1, $2, $3, $4, $5, $6) RETURNING created_datetime, url_id',[req.user.userId, urlId,(req.body.customAlias? req.body.customAlias:""), req.body.longURL, (req.body.topic? req.body.topic:""),(req.body.customAlias? req.body.customAlias:urlId)]);
         if(response.rowCount > 0) {
             client.release();
-            res.status(200).json({ shortUrl: `${req.protocol}://${req.get('host')}/api/shorten/${(req.body.customAlias)?req.body.customAlias:response.rows[0].url_id}`, createdAt:response.rows[0].created_datetime });
+            res.status(200).json({ shortUrl: `https://${req.get('host')}/api/shorten/${(req.body.customAlias)?req.body.customAlias:response.rows[0].url_id}`, createdAt:response.rows[0].created_datetime });
             return;
         }
     }
