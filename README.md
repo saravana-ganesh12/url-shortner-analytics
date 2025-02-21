@@ -6,11 +6,6 @@ A scalable URL shortener API with advanced analytics, Google Sign-In authenticat
  
  [https://url-shortner-web-application.azurewebsites.net/](https://url-shortner-web-application.azurewebsites.net/)
 
-## Application Page
-
-![alt text](loginpage.png)
-
-![alt text](homepage.png) 
 
 ## Overview
 
@@ -24,6 +19,12 @@ This application allows users to create shortened URLs, group them by topics, an
 - **Caching**: Redis Cloud
 - **Containerization**: Docker Container, Azure Container Registry
 - **Deployment**: Azure App Service - Container Apps
+
+## Application Page
+
+![alt text](public/loginpage.png)
+
+![alt text](public/homepage.png) 
 
 ## Project Structure
 
@@ -124,8 +125,8 @@ POST /api/shorten
 ```json
 {
   "longUrl": "https://test.com/shortening",
-  "customAlias": "alias",  // optional
-  "topic": "test"         // optional
+  "customAlias": "alias",  
+  "topic": "test"         
 }
 ```
 
@@ -167,7 +168,6 @@ GET /api/analytics/:alias
   "clicksByDate": [
     { "date": "2025-02-15", "clicks": 150 },
     { "date": "2025-02-16", "clicks": 203 },
-    // ...last 7 days
   ],
   "osType": [
     { "osName": "Windows", "uniqueClicks": 523, "uniqueUsers": 410 },
@@ -197,7 +197,6 @@ GET /api/analytics/topic/:topic
   "clicksByDate": [
     { "date": "2025-02-15", "clicks": 450 },
     { "date": "2025-02-16", "clicks": 523 },
-    // ...recent dates
   ],
   "urls": [
     {
@@ -269,33 +268,32 @@ docker build -t url-shortener-api .
 Create a `.env` file in the root directory with the following variables:
 
 ```
-HOST = <>
+- HOST = <>
 
-PGSQL_HOST=  <>
-PGSQL_PORT=  <>
-PGSQL_USER=  <>
-PGSQL_PASSWORD=  <>
-PGSQL_DATABASE= <>
+- PGSQL_HOST=  <>
+- PGSQL_PORT=  <>
+- PGSQL_USER=  <>
+- PGSQL_PASSWORD=  <>
+- PGSQL_DATABASE= <>
 
-REDIS_HOST =  <>
-REDIS_USER =  <>
-REDIS_PASSWORD =  <>
-REDIS_PORT =  <>
+- REDIS_HOST =  <>
+- REDIS_USER =  <>
+- REDIS_PASSWORD =  <>
+- REDIS_PORT =  <>
 
-AUTH_GOOGLE_ID= <>
-AUTH_GOOGLE_SECRET= <>
+- AUTH_GOOGLE_ID= <>
+- AUTH_GOOGLE_SECRET= <>
 
-AUTH_GOOGLE_OAUTH_URL=  <>
-AUTH_GOOGLE_CALLBACK_URL=  <>
-AUTH_GOOGLE_ACCESS_TOKEN_URL=  <>
-AUTH_GOOGLE_TOKEN_INFO_URL=  <>
+- AUTH_GOOGLE_OAUTH_URL=  <>
+- AUTH_GOOGLE_CALLBACK_URL=  <>
+- AUTH_GOOGLE_ACCESS_TOKEN_URL=  <>
+- AUTH_GOOGLE_TOKEN_INFO_URL=  <>
 
-JWT_SECRET =  <>
+- JWT_SECRET =  <>
 
-PORT=  <>
+- PORT=  <>
 
 ```
-
 ## Getting Started in Development environment
 
 1. Clone the repository
