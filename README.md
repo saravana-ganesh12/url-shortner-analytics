@@ -2,6 +2,16 @@
 
 A scalable URL shortener API with advanced analytics, Google Sign-In authentication, and rate limiting.
 
+ ## Live URL for Application: 
+ 
+ [https://url-shortner-web-application.azurewebsites.net/](https://url-shortner-web-application.azurewebsites.net/)
+
+## Application Page
+
+![alt text](loginpage.png)
+
+![alt text](homepage.png) 
+
 ## Overview
 
 This application allows users to create shortened URLs, group them by topics, and access detailed analytics about link usage. The log tracks various metrics including clicks, unique visitors, device types, and operating systems.
@@ -10,9 +20,10 @@ This application allows users to create shortened URLs, group them by topics, an
 
 - **Backend**: Express.js
 - **Authentication**: JWT, Google Sign-In
-- **Database**: PostgreSQL (for user data, URLs, and logs)
-- **Caching**: Redis
-- **Containerization**: Docker
+- **Database**: Azure PostgreSQL Flexible Server (for user data, URLs, and logs)
+- **Caching**: Redis Cloud
+- **Containerization**: Docker Container, Azure Container Registry
+- **Deployment**: Azure App Service - Container Apps
 
 ## Project Structure
 
