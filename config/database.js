@@ -8,7 +8,8 @@ const pool = new pg.Pool({
     password: process.env.PGSQL_PASSWORD,
     host: process.env.PGSQL_HOST,
     port: Number(process.env.PGSQL_PORT),
-    database: process.env.PGSQL_DATABASE
+    database: process.env.PGSQL_DATABASE,
+    ssl:true
 });
 
 export default pool;
